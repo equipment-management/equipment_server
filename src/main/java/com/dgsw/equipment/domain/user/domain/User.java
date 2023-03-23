@@ -30,6 +30,7 @@ public class User extends BaseTime {
     private int number;
     private String name;
     private String profileImage;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -41,16 +42,17 @@ public class User extends BaseTime {
         getEquipmentList().add(equipment);
     }
 
-    public void updateUser(int grade, int room, int number, String name, String profileImage) {
+    public void updateUser(int grade, int room, int number, String name, String profileImage, String email) {
         this.grade = this.grade == grade ? this.grade : grade;
         this.room = this.room == room ? this.room : room;
         this.number = this.number == number ? this.number : number;
         this.name = this.name.equals(name) ? this.name : name;
         this.profileImage = this.profileImage.equals(profileImage) ?  this.profileImage: profileImage;
+        this.email = this.email.equals(email) ? this.email : email;
     }
 
     @Builder
-    public User(String uniqueId, int grade, int room, int number, String name, String profileImage, UserRole role) {
+    public User(String uniqueId, int grade, int room, int number, String name, String profileImage, UserRole role, String email) {
         this.uniqueId = uniqueId;
         this.grade = grade;
         this.room = room;
@@ -58,5 +60,6 @@ public class User extends BaseTime {
         this.name = name;
         this.profileImage = profileImage;
         this.role = role;
+        this.email = email;
     }
 }

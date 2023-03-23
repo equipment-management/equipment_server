@@ -25,6 +25,7 @@ public class DOpenInfoResponse implements Serializable {
                 .uniqueId(this.uniqueId).profileImage(this.profileImage)
                 .grade(this.grade).room(this.room).number(this.number).name(this.name)
                 .role(accessLevel == 0 ? UserRole.ROLE_STUDENT : accessLevel == 1 ? UserRole.ROLE_TEACHER : UserRole.ROLE_ADMIN)
+                .email(this.email)
                 .build();
     }
 

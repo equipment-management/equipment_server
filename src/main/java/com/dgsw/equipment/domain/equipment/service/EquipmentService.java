@@ -65,9 +65,8 @@ public class EquipmentService {
         if(!userEquipment.getStatus().equals(EquipmentStatus.APPROVE))
             throw UserEquipmentReturnPermissionException.EXCEPTION;
 
-        equipment.returnRental();
+        userEquipment.returnEquipment();
         equipmentRepository.save(equipment);
-        userEquipmentRepository.delete(userEquipment);
     }
 
     public UserEquipmentListResponse getEquipmentAllByUser() {

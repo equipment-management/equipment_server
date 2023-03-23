@@ -9,7 +9,8 @@ public enum EquipmentStatus {
 
     APPROVE("승인"),
     DENY("거절"),
-    PENDING("보류");
+    PENDING("보류"),
+    RETURN("반납");
 
     private final String status;
 

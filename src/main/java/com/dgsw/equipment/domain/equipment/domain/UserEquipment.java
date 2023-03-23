@@ -42,6 +42,9 @@ public class UserEquipment {
 
     @Enumerated(EnumType.STRING)
     private EquipmentStatus status;
+    public void returnEquipment() {
+        this.status = EquipmentStatus.RETURN;
+    }
 
     @PrePersist
     public void prePersist() {
