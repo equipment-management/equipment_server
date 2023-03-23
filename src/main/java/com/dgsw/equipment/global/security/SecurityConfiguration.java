@@ -1,11 +1,12 @@
 package com.dgsw.equipment.global.security;
 
-import com.dgsw.equipment.domain.auth.domain.enums.UserRole;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.global.security.jwt.JwtProvider;
 import com.dgsw.equipment.global.security.jwt.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -46,6 +47,10 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/equipment/**").hasRole(UserRole.ROLE_STUDENT.getRole())
+                .antMatchers(HttpMethod.DELETE, "/equipment/**").hasRole(UserRole.ROLE_STUDENT.getRole())
+                .antMatchers(HttpMethod.GET, "/equipment/user/**").hasRole(UserRole.ROLE_STUDENT.getRole())
+                .antMatchers(HttpMethod.GET, "/equipment/list/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);

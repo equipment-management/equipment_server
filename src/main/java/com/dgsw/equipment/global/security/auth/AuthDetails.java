@@ -1,6 +1,6 @@
 package com.dgsw.equipment.global.security.auth;
 
-import com.dgsw.equipment.domain.auth.domain.User;
+import com.dgsw.equipment.domain.user.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

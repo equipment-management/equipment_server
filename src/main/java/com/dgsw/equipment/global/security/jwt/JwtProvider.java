@@ -1,7 +1,7 @@
 package com.dgsw.equipment.global.security.jwt;
 
 import com.dgsw.equipment.domain.auth.domain.RefreshToken;
-import com.dgsw.equipment.domain.auth.domain.enums.UserRole;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.domain.auth.domain.repository.RefreshTokenRepository;
 import com.dgsw.equipment.global.security.auth.AuthDetailsService;
 import com.dgsw.equipment.global.security.auth.UserToken;

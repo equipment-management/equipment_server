@@ -1,7 +1,7 @@
 package com.dgsw.equipment.global.security.auth;
 
-import com.dgsw.equipment.domain.auth.domain.repository.UserRepository;
-import com.dgsw.equipment.domain.auth.exception.UserNotFoundException;
+import com.dgsw.equipment.domain.user.domain.repository.UserRepository;
+import com.dgsw.equipment.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

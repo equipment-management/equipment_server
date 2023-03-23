@@ -25,7 +25,18 @@ public enum ErrorCode implements ErrorProperty{
 
     // DAuth 코드
     DAUTH_FALSIFY_CODE(HttpStatus.BAD_REQUEST, "변조된 CODE 입니다."),
-    DAUTH_TOKEN_CODE(HttpStatus.BAD_REQUEST, "토큰이 잘못된었습니다.");
+    DAUTH_TOKEN_CODE(HttpStatus.BAD_REQUEST, "토큰이 잘못된었습니다."),
+
+    // Equipment 코드
+    EQUIPMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "기자재를 찾을 수 없습니다."),
+    EQUIPMENT_CONFLICT(HttpStatus.CONFLICT, "기자재가 이미 존재합니다."),
+    EQUIPMENT_OVERFLOW(HttpStatus.BAD_REQUEST, "기자재 개수를 초과하였습니다."),
+    EQUIPMENT_UNDERFLOW(HttpStatus.BAD_REQUEST, "반납할 기자재가 존재하지 않습니다."),
+
+    // User Equipment 코드
+    USER_EQUIPMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "신청한 기자재를 찾을 수 없습니다."),
+    USER_EQUIPMENT_FORBIDDEN(HttpStatus.FORBIDDEN, "기자재에 대한 권한이 없습니다."),
+    USER_EQUIPMENT_RETURN_PERMISSION(HttpStatus.FORBIDDEN, "기자재를 반납할 권한이 없습니다.");
 
     private final HttpStatus status;
     private final String message;

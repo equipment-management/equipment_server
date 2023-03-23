@@ -1,6 +1,6 @@
-package com.dgsw.equipment.domain.auth.domain.repository;
+package com.dgsw.equipment.domain.user.domain.repository;
 
-import com.dgsw.equipment.domain.auth.domain.User;
+import com.dgsw.equipment.domain.user.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

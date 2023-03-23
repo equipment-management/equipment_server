@@ -1,7 +1,7 @@
 package com.dgsw.equipment.global.infra.oauth.dodam.dto.response;
 
-import com.dgsw.equipment.domain.auth.domain.User;
-import com.dgsw.equipment.domain.auth.domain.enums.UserRole;
+import com.dgsw.equipment.domain.user.domain.User;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import lombok.*;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ public class DOpenInfoResponse implements Serializable {
         return User.builder()
                 .uniqueId(this.uniqueId).profileImage(this.profileImage)
                 .grade(this.grade).room(this.room).number(this.number).name(this.name)
-                .role(accessLevel == 1 ? UserRole.ROLE_STUDENT : accessLevel == 2 ? UserRole.ROLE_TEACHER : UserRole.ROLE_ADMIN)
+                .role(accessLevel == 0 ? UserRole.ROLE_STUDENT : accessLevel == 1 ? UserRole.ROLE_TEACHER : UserRole.ROLE_ADMIN)
                 .build();
     }
 

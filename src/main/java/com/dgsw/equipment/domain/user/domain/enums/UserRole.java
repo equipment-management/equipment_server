@@ -1,4 +1,4 @@
-package com.dgsw.equipment.domain.auth.domain.enums;
+package com.dgsw.equipment.domain.user.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

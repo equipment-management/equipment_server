@@ -1,6 +1,6 @@
-package com.dgsw.equipment.domain.auth.presentation.dto.response;
+package com.dgsw.equipment.domain.user.presentation.dto.response;
 
-import com.dgsw.equipment.domain.auth.domain.enums.UserRole;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserResponse {
 
+    private String uniqueId;
     private int grade;
     private int room;
     private int number;

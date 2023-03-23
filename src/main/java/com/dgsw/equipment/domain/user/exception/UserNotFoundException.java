@@ -1,4 +1,4 @@
-package com.dgsw.equipment.domain.auth.exception;
+package com.dgsw.equipment.domain.user.exception;
 
 import com.dgsw.equipment.global.exception.BusinessException;
 import com.dgsw.equipment.global.exception.error.ErrorCode;
