@@ -22,6 +22,7 @@ public enum ErrorCode implements ErrorProperty{
     USER_CONFLICT(HttpStatus.CONFLICT, "유저가 이미 존재합니다."),
     PASSWORD_WRONG(HttpStatus.BAD_REQUEST, "비밀번호가 맞지 않습니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다."),
+    ADMIN_FORBIDDEN(HttpStatus.FORBIDDEN, "관리자 권한이 존재하지 않습니다."),
 
     // DAuth 코드
     DAUTH_FALSIFY_CODE(HttpStatus.BAD_REQUEST, "변조된 CODE 입니다."),

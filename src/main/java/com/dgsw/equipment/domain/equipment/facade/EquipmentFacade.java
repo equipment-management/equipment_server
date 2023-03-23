@@ -2,14 +2,17 @@ package com.dgsw.equipment.domain.equipment.facade;
 
 import com.dgsw.equipment.domain.equipment.domain.Equipment;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
+import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentType;
 import com.dgsw.equipment.domain.equipment.domain.repository.EquipmentRepository;
 import com.dgsw.equipment.domain.equipment.domain.repository.UserEquipmentRepository;
 import com.dgsw.equipment.domain.equipment.exception.EquipmentExistsByEquipmentNameException;
 import com.dgsw.equipment.domain.equipment.exception.EquipmentNotFoundException;
 import com.dgsw.equipment.domain.equipment.exception.UserEquipmentForbiddenException;
+import com.dgsw.equipment.domain.equipment.exception.UserEquipmentNotFoundException;
 import com.dgsw.equipment.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,8 +64,20 @@ public class EquipmentFacade {
     }
 
     @Transactional
+    public List<UserEquipment> findUserEquipmentAllByStatus(EquipmentStatus status) {
+        return userEquipmentRepository.findAllByStatus(status);
+    }
+
+    @Transactional
     public UserEquipment checkEquipmentPermission(User user, Equipment equipment) {
         return userEquipmentRepository.findByUserAndEquipment(user, equipment)
                 .orElseThrow(() -> UserEquipmentForbiddenException.EXCEPTION);
     }
+
+    @Transactional
+    public UserEquipment findUserEquipmentByUserEquipmentId(Long userEquipmentId) {
+        return userEquipmentRepository.findById(userEquipmentId)
+                .orElseThrow(() -> UserEquipmentNotFoundException.EXCEPTION);
+    }
+
 }

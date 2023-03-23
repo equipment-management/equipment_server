@@ -10,11 +10,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserEquipmentResponse {
 
-    private Long equipmentId;
+    private Long userEquipmentId;
     private String equipmentName;
     private String brand;
     private EquipmentType type;
     private int size;
     private EquipmentStatus status;
+    private String rentaledAt;
+    private String terminateRental;
 
 }

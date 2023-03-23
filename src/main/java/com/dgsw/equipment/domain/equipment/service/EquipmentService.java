@@ -73,7 +73,7 @@ public class EquipmentService {
         User user = userFacade.getCurrentUser();
 
         List<UserEquipmentResponse> list = equipmentFacade.findUserEquipmentAllByUser(user)
-                .stream().map(ResponseUtil::getUserEquipmentResponseByUserEquipment)
+                .stream().map(ResponseUtil::getUserEquipmentResponse)
                 .collect(Collectors.toList());
 
         return UserEquipmentListResponse.builder()

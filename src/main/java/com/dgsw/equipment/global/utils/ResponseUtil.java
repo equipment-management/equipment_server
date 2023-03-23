@@ -6,6 +6,9 @@ import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentRe
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentResponse;
 import com.dgsw.equipment.domain.user.domain.User;
 import com.dgsw.equipment.domain.user.presentation.dto.response.UserResponse;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.format.DateTimeFormatter;
 
 public class ResponseUtil {
 
@@ -28,13 +31,15 @@ public class ResponseUtil {
                 .build();
     }
 
-    public static UserEquipmentResponse getUserEquipmentResponseByUserEquipment(UserEquipment equipment) {
+    public static UserEquipmentResponse getUserEquipmentResponse(UserEquipment equipment) {
         return UserEquipmentResponse.builder()
-                .equipmentId(equipment.getEquipment().getEquipmentId())
+                .userEquipmentId(equipment.getEquipment().getEquipmentId())
                 .equipmentName(equipment.getEquipment().getEquipmentName())
                 .brand(equipment.getEquipment().getBrand()).type(equipment.getEquipment().getType())
                 .size(equipment.getEquipment().getSize() - equipment.getEquipment().getRentalSize())
                 .status(equipment.getStatus())
+                .rentaledAt(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(equipment.getRentaledAt()))
+                .terminateRental(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(equipment.getTerminateRental()))
                 .build();
     }
 }
