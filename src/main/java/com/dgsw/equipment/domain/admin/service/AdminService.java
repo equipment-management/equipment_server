@@ -59,4 +59,15 @@ public class AdminService {
         equipmentRepository.save(equipment.getEquipment());
     }
 
+    public void returnEquipment(Long userEquipmentId, String hashCode) {
+        userFacade.checkPermission();
+
+        UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
+        equipment.checkHashCode(hashCode);
+        equipment.returnEquipment();
+
+        equipment.getEquipment().returnRental();
+        equipmentRepository.save(equipment.getEquipment());
+    }
+
 }

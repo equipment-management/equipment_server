@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @Operation(summary = "신청 기자재 거절")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deny/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void denyUserEquipment(
             @PathVariable("id") Long userEquipmentId
@@ -32,13 +32,23 @@ public class AdminController {
     }
 
     @Operation(summary = "신청 기자재 승인")
-    @PostMapping("/{id}")
+    @PostMapping("/approve/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void approveUserEquipment(
             @PathVariable("id") Long userEquipmentId,
             @RequestParam("hash") String hashCode
     ) {
         adminService.approveEquipment(userEquipmentId, hashCode);
+    }
+
+    @Operation(summary = "기자재 반납")
+    @DeleteMapping("/return/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void returnUserEquipment(
+            @PathVariable("id") Long userEquipmentId,
+            @RequestParam("hash") String hashCode
+    ) {
+        adminService.returnEquipment(userEquipmentId, hashCode);
     }
 
 }

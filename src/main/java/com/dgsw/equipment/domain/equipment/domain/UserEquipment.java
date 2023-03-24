@@ -1,5 +1,6 @@
 package com.dgsw.equipment.domain.equipment.domain;
 
+import com.dgsw.equipment.domain.admin.exception.HashCodeWrongException;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
 import com.dgsw.equipment.domain.user.domain.User;
 import lombok.AccessLevel;
@@ -44,6 +45,10 @@ public class UserEquipment {
     private String hashCode;
     public void addHashCode(String hashCode) {
         this.hashCode = hashCode;
+    }
+    public void checkHashCode(String hashCode) {
+        if(!this.hashCode.equals(hashCode))
+            throw HashCodeWrongException.EXCEPTION;
     }
 
     @Enumerated(EnumType.STRING)
