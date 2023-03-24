@@ -2,6 +2,7 @@ package com.dgsw.equipment.domain.admin.service;
 
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
+import com.dgsw.equipment.domain.equipment.domain.repository.EquipmentRepository;
 import com.dgsw.equipment.domain.equipment.domain.repository.UserEquipmentRepository;
 import com.dgsw.equipment.domain.equipment.facade.EquipmentFacade;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminService {
 
+    private final EquipmentRepository equipmentRepository;
     private final UserEquipmentRepository userEquipmentRepository;
     private final EquipmentFacade equipmentFacade;
     private final UserFacade userFacade;
@@ -44,6 +46,16 @@ public class AdminService {
         equipment.denyEquipment();
 
         userEquipmentRepository.save(equipment);
+    }
+
+    public void approveEquipment(Long userEquipmentId) {
+        userFacade.checkPermission();
+
+        UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
+        equipment.approveEquipment();
+
+        equipment.getEquipment().addRental();
+        equipmentRepository.save(equipment.getEquipment());
     }
 
 }

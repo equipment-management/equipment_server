@@ -48,6 +48,9 @@ public class UserEquipment {
     public void denyEquipment() {
         this.status = EquipmentStatus.DENY;
     }
+    public void approveEquipment() {
+        this.status = EquipmentStatus.APPROVE;
+    }
 
     @PrePersist
     public void prePersist() {

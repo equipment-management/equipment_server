@@ -3,14 +3,12 @@ package com.dgsw.equipment.domain.user.facade;
 import com.dgsw.equipment.domain.user.domain.User;
 import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.domain.user.domain.repository.UserRepository;
-import com.dgsw.equipment.domain.user.exception.AdminForbiddenException;
-import com.dgsw.equipment.domain.user.exception.UserNotFoundException;
+import com.dgsw.equipment.domain.admin.exception.AdminForbiddenException;
 import com.dgsw.equipment.global.security.auth.AuthDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component

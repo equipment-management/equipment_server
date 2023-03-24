@@ -31,4 +31,13 @@ public class AdminController {
         adminService.denyUserEquipment(userEquipmentId);
     }
 
+    @Operation(summary = "신청 기자재 승인")
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void approveUserEquipment(
+            @PathVariable("id") Long userEquipmentId
+    ) {
+        adminService.approveEquipment(userEquipmentId);
+    }
+
 }
