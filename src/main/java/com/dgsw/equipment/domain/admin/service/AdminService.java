@@ -48,10 +48,11 @@ public class AdminService {
         userEquipmentRepository.save(equipment);
     }
 
-    public void approveEquipment(Long userEquipmentId) {
+    public void approveEquipment(Long userEquipmentId, String hashCode) {
         userFacade.checkPermission();
 
         UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
+        equipment.addHashCode(hashCode);
         equipment.approveEquipment();
 
         equipment.getEquipment().addRental();

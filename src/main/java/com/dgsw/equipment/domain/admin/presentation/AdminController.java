@@ -35,9 +35,10 @@ public class AdminController {
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void approveUserEquipment(
-            @PathVariable("id") Long userEquipmentId
+            @PathVariable("id") Long userEquipmentId,
+            @RequestParam("hash") String hashCode
     ) {
-        adminService.approveEquipment(userEquipmentId);
+        adminService.approveEquipment(userEquipmentId, hashCode);
     }
 
 }

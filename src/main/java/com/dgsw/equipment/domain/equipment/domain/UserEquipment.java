@@ -40,6 +40,12 @@ public class UserEquipment {
     @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
     private LocalDate terminateRental;
 
+    @Column(unique = true)
+    private String hashCode;
+    public void addHashCode(String hashCode) {
+        this.hashCode = hashCode;
+    }
+
     @Enumerated(EnumType.STRING)
     private EquipmentStatus status;
     public void returnEquipment() {
