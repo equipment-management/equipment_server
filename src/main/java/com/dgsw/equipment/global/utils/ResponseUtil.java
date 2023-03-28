@@ -6,7 +6,6 @@ import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentRe
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentResponse;
 import com.dgsw.equipment.domain.user.domain.User;
 import com.dgsw.equipment.domain.user.presentation.dto.response.UserResponse;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.format.DateTimeFormatter;
 
@@ -14,9 +13,7 @@ public class ResponseUtil {
 
     public static UserResponse getUserResponse(User user) {
         return UserResponse.builder()
-                .uniqueId(user.getUniqueId())
-                .grade(user.getGrade()).room(user.getRoom())
-                .number(user.getNumber()).name(user.getName())
+                .name(user.getName())
                 .profileImage(user.getProfileImage())
                 .role(user.getRole())
                 .build();

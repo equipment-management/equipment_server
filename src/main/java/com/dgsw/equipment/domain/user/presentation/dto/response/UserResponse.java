@@ -9,10 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserResponse {
 
-    private String uniqueId;
-    private int grade;
-    private int room;
-    private int number;
     private String name;
     private String profileImage;
     private UserRole role;
