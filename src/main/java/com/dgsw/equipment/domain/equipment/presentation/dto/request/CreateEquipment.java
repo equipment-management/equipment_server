@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateEquipment {
@@ -14,6 +16,7 @@ public class CreateEquipment {
     private String brand;
     private EquipmentType type;
     private int size;
+    private List<Long> imageList;
 
     public Equipment toEntity() {
         return Equipment.builder()

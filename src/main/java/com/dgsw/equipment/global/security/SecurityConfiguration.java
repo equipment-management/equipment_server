@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/equipment/**").hasRole(UserRole.ROLE_STUDENT.getRole())
+                .antMatchers(HttpMethod.POST, "/equipment/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/equipment/**").hasRole(UserRole.ROLE_STUDENT.getRole())
                 .antMatchers(HttpMethod.GET, "/equipment/user/**").hasRole(UserRole.ROLE_STUDENT.getRole())
                 .antMatchers(HttpMethod.GET, "/equipment/list/**").permitAll()

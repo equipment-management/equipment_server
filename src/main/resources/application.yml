@@ -2,7 +2,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://equipment.cbnjrsnrdzlr.ap-northeast-2.rds.amazonaws.com:3306/equipment?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://equipment.cqidwg1vvp0o.ap-northeast-2.rds.amazonaws.com:3306/equipment?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: equipment
     password: Equipment12!!
@@ -34,6 +34,20 @@ jwt:
   prefix: Bearer
   header: Authorization
   secret-key: difoi3iu2jioj132890u8979f7dxj1k2nbjkmhcxuasijf879687912yhjkhsdfuoiljkh13
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+aws:
+  access-key: AKIAQ2JYNXZ5LVXY4A23
+  secret-key: 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
+  region: ap-northeast-2
+  bucket: dgswequipment
+  url: https://dgswequipment.s3.ap-northeast-2.amazonaws.com/
 
 app:
   dauth:

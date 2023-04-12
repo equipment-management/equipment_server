@@ -1,5 +1,6 @@
 package com.dgsw.equipment.domain.equipment.service;
 
+import com.dgsw.equipment.domain.admin.exception.AdminForbiddenException;
 import com.dgsw.equipment.domain.equipment.domain.Equipment;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
@@ -14,7 +15,11 @@ import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentLi
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentResponse;
+import com.dgsw.equipment.domain.upload.domain.Image;
+import com.dgsw.equipment.domain.upload.domain.repository.ImageRepository;
+import com.dgsw.equipment.domain.upload.exception.ImageNotFoundException;
 import com.dgsw.equipment.domain.user.domain.User;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.domain.user.facade.UserFacade;
 import com.dgsw.equipment.global.utils.ResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +36,25 @@ import java.util.stream.Collectors;
 public class EquipmentService {
 
     private final EquipmentFacade equipmentFacade;
+    private final ImageRepository imageRepository;
     private final UserFacade userFacade;
     private final EquipmentRepository equipmentRepository;
     private final UserEquipmentRepository userEquipmentRepository;
 
     public void createEquipment(CreateEquipment request) {
+        userFacade.checkPermission();
+
         equipmentFacade.existsByEquipmentName(request.getName());
         Equipment equipment = request.toEntity();
+
+        if(!request.getImageList().isEmpty()) {
+            List<Image> images = request.getImageList().stream().map(item ->
+                imageRepository.findById(item)
+                        .orElseThrow(() -> ImageNotFoundException.EXCEPTION)
+            ).peek(image -> image.setEquipment(equipment)).collect(Collectors.toList());
+            equipment.addImage(images);
+        }
+
         equipmentRepository.save(equipment);
     }
 

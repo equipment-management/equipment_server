@@ -3,6 +3,7 @@ package com.dgsw.equipment.domain.equipment.domain;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentType;
 import com.dgsw.equipment.domain.equipment.exception.EquipmentOverflowException;
 import com.dgsw.equipment.domain.equipment.exception.EquipmentUnderflowException;
+import com.dgsw.equipment.domain.upload.domain.Image;
 import com.dgsw.equipment.global.entity.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -43,6 +44,14 @@ public class Equipment extends BaseTime {
             this.rentalSize--;
         else
             throw EquipmentUnderflowException.EXCEPTION;
+    }
+
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> imageList;
+    public void addImage(List<Image> imageList) {
+        imageList.stream().map(image ->
+                getImageList().add(image)
+        ).close();
     }
 
     @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, orphanRemoval = true)

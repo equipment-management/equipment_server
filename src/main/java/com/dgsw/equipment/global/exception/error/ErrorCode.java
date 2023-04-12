@@ -38,7 +38,10 @@ public enum ErrorCode implements ErrorProperty{
     // User Equipment 코드
     USER_EQUIPMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "신청한 기자재를 찾을 수 없습니다."),
     USER_EQUIPMENT_FORBIDDEN(HttpStatus.FORBIDDEN, "기자재에 대한 권한이 없습니다."),
-    USER_EQUIPMENT_RETURN_PERMISSION(HttpStatus.FORBIDDEN, "기자재를 반납할 권한이 없습니다.");
+    USER_EQUIPMENT_RETURN_PERMISSION(HttpStatus.FORBIDDEN, "기자재를 반납할 권한이 없습니다."),
+
+    // Image 코드
+    IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다.");
 
     private final HttpStatus status;
     private final String message;
