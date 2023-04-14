@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EquipmentListResponse {
 
+    private int count;
     private List<EquipmentResponse> list;
 
 }

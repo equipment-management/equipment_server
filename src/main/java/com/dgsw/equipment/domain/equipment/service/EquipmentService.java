@@ -1,6 +1,5 @@
 package com.dgsw.equipment.domain.equipment.service;
 
-import com.dgsw.equipment.domain.admin.exception.AdminForbiddenException;
 import com.dgsw.equipment.domain.equipment.domain.Equipment;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
@@ -19,7 +18,6 @@ import com.dgsw.equipment.domain.upload.domain.Image;
 import com.dgsw.equipment.domain.upload.domain.repository.ImageRepository;
 import com.dgsw.equipment.domain.upload.exception.ImageNotFoundException;
 import com.dgsw.equipment.domain.user.domain.User;
-import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.domain.user.facade.UserFacade;
 import com.dgsw.equipment.global.utils.ResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -94,6 +92,7 @@ public class EquipmentService {
                 .collect(Collectors.toList());
 
         return UserEquipmentListResponse.builder()
+                .count(list.size())
                 .list(list)
                 .build();
     }
@@ -105,6 +104,7 @@ public class EquipmentService {
                 .collect(Collectors.toList());
 
         return EquipmentListResponse.builder()
+                .count(list.size())
                 .list(list)
                 .build();
     }
