@@ -22,4 +22,9 @@ public class WebClientConfiguration implements WebFluxConfigurer {
         return WebClient.create(appProperties.getOpenUrl());
     }
 
+    @Bean
+    public WebClient raspberryClient() {
+        return WebClient.create(appProperties.getRasUrl());
+    }
+
 }

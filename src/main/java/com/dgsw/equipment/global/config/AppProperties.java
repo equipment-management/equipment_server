@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConfigurationProperties(prefix = "app.dauth")
 public class AppProperties {
 
+    private String rasUrl;
     private String authUrl;
     private String openUrl;
     private String clientId;

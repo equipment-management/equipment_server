@@ -6,6 +6,7 @@ import com.dgsw.equipment.domain.equipment.presentation.dto.request.EquipmentReq
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.service.EquipmentService;
+import com.dgsw.equipment.global.infra.raspberry.service.RaspberryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class EquipmentController {
 
     private final EquipmentService equipmentService;
+    private final RaspberryService raspberryService;
 
     @Operation(summary = "기자재 등록")
     @PostMapping

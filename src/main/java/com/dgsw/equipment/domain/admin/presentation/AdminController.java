@@ -2,6 +2,8 @@ package com.dgsw.equipment.domain.admin.presentation;
 
 import com.dgsw.equipment.domain.admin.service.AdminService;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
+import com.dgsw.equipment.global.infra.raspberry.ro.HashRo;
+import com.dgsw.equipment.global.infra.raspberry.service.RaspberryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +17,16 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final AdminService adminService;
+    private final RaspberryService raspberryService;
 
     @Operation(summary = "승인되지 않은 신청 리스트 조회")
-    @GetMapping("")
+    @GetMapping("/pending")
+    public UserEquipmentListResponse getUserEquipmentAllByPending() {
+        return adminService.getUserEquipmentAllByPending();
+    }
+
+    @Operation(summary = "승인된 신청 리스트 조회")
+    @GetMapping("/approve")
     public UserEquipmentListResponse getUserEquipmentAllByApprove() {
         return adminService.getUserEquipmentAllByApprove();
     }
@@ -29,6 +38,12 @@ public class AdminController {
             @PathVariable("id") Long userEquipmentId
     ) {
         adminService.denyUserEquipment(userEquipmentId);
+    }
+
+    @Operation(summary = "해시코드 가져오기")
+    @GetMapping("/hash")
+    public HashRo getHashCode() {
+        return raspberryService.returnHash();
     }
 
     @Operation(summary = "신청 기자재 승인")

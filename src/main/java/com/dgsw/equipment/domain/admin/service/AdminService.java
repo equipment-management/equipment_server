@@ -24,11 +24,26 @@ public class AdminService {
     private final EquipmentFacade equipmentFacade;
     private final UserFacade userFacade;
 
-    public UserEquipmentListResponse getUserEquipmentAllByApprove() {
+    public UserEquipmentListResponse getUserEquipmentAllByPending() {
         userFacade.checkPermission();
 
         List<UserEquipment> userEquipments = equipmentFacade
                 .findUserEquipmentAllByStatus(EquipmentStatus.PENDING);
+
+        List<UserEquipmentResponse> list = userEquipments.stream()
+                .map(ResponseUtil::getUserEquipmentResponse)
+                .collect(Collectors.toList());
+
+        return UserEquipmentListResponse.builder()
+                .list(list)
+                .build();
+    }
+
+    public UserEquipmentListResponse getUserEquipmentAllByApprove() {
+        userFacade.checkPermission();
+
+        List<UserEquipment> userEquipments = equipmentFacade
+                .findUserEquipmentAllByStatus(EquipmentStatus.APPROVE);
 
         List<UserEquipmentResponse> list = userEquipments.stream()
                 .map(ResponseUtil::getUserEquipmentResponse)

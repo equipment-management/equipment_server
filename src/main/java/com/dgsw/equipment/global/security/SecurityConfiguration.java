@@ -51,6 +51,8 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.DELETE, "/equipment/**").hasRole(UserRole.ROLE_STUDENT.getRole())
                 .antMatchers(HttpMethod.GET, "/equipment/user/**").hasRole(UserRole.ROLE_STUDENT.getRole())
                 .antMatchers(HttpMethod.GET, "/equipment/list/**").permitAll()
+                .antMatchers("/admin/**").hasRole(UserRole.ROLE_ADMIN.getRole())
+                .antMatchers(HttpMethod.GET, "/raspberry/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
