@@ -13,7 +13,6 @@ public class EquipmentResponse {
     private String equipmentName;
     private String brand;
     private EquipmentType type;
-
     private int size;
 
 }

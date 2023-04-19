@@ -13,7 +13,7 @@ public class UserService {
 
     private final UserFacade userFacade;
 
-    public UserResponse getUserInfo(String uniqueId) {
+    public UserResponse getUserInfo() {
         User user = userFacade.getCurrentUser();
         return ResponseUtil.getUserResponse(user);
     }

@@ -19,11 +19,9 @@ public class UserController {
     private final UserService userService;
 
     @Operation(summary = "현재 로그인한 유저의 프로필 정보 조회")
-    @GetMapping("/{unique-id}")
-    public UserResponse getUserInfo(
-            @PathVariable("unique-id") String uniqueId
-    ) {
-        return userService.getUserInfo(uniqueId);
+    @GetMapping("")
+    public UserResponse getUserInfo() {
+        return userService.getUserInfo();
     }
 
 }
