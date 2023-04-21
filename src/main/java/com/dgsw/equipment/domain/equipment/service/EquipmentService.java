@@ -91,7 +91,7 @@ public class EquipmentService {
                 .stream().map(ResponseUtil::getUserEquipmentResponse)
                 .collect(Collectors.toList());
 
-        int count = (int) list.stream().filter(item -> item.getStatus().equals(EquipmentStatus.APPROVE)).count();
+        int count = (int) list.stream().filter(item -> item.getStatus().equals(EquipmentStatus.PENDING)).count();
         return UserEquipmentListResponse.builder()
                 .count(count)
                 .list(list)
