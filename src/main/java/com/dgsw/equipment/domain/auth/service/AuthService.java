@@ -5,6 +5,7 @@ import com.dgsw.equipment.domain.user.domain.repository.UserRepository;
 import com.dgsw.equipment.domain.user.exception.UserNotFoundException;
 import com.dgsw.equipment.domain.auth.presentation.dto.request.LoginRequest;
 import com.dgsw.equipment.domain.auth.presentation.dto.response.TokenResponse;
+import com.dgsw.equipment.domain.user.facade.UserFacade;
 import com.dgsw.equipment.global.infra.oauth.dodam.dto.response.DOpenInfoResponse;
 import com.dgsw.equipment.global.infra.oauth.dodam.dto.response.DOpenResponse;
 import com.dgsw.equipment.global.infra.oauth.dodam.service.DAuthService;
@@ -25,6 +26,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final DAuthService dAuthService;
     private final JwtProvider jwtProvider;
+    private final UserFacade userFacade;
 
     @Transactional
     public TokenResponse login(LoginRequest request) {
@@ -46,6 +48,13 @@ public class AuthService {
     private void userSignUp(DOpenInfoResponse info) {
         User user = info.toEntity();
         userRepository.save(user);
+    }
+
+    @Transactional
+    public String refreshAccessToken() {
+        User user = userFacade.getCurrentUser();
+
+        return jwtProvider.generateAccessToken(user.getUniqueId(), user.getRole());
     }
 
 }

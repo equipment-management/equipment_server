@@ -22,8 +22,13 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = jwtProvider.resolveToken(request);
+        String path = request.getServletPath();
 
+        log.info("Path : " + path);
         if(token != null) {
+            if(path.equals("/auth/refresh")) {
+                jwtProvider.checkRefreshToken(token.trim());
+            }
             Authentication authentication = jwtProvider.authentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

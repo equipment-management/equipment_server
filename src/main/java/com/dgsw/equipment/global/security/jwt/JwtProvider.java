@@ -39,6 +39,12 @@ public class JwtProvider {
     }
 
     @Transactional
+    public void checkRefreshToken(String token) {
+        refreshTokenRepository.findById(token)
+                .orElseThrow(() -> ExpiredTokenException.EXCEPTION);
+    }
+
+    @Transactional
     public Authentication authentication(String token) {
         return new UserToken(authDetailsService.loadUserByUsername(getTokenSubject(token)));
     }
