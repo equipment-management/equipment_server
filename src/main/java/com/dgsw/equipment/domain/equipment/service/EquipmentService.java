@@ -12,6 +12,7 @@ import com.dgsw.equipment.domain.equipment.presentation.dto.request.CreateEquipm
 import com.dgsw.equipment.domain.equipment.presentation.dto.request.EquipmentRequest;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentResponse;
+import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentTypeResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentResponse;
 import com.dgsw.equipment.domain.upload.domain.Image;
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,5 +112,9 @@ public class EquipmentService {
                 .build();
     }
 
+    public EquipmentTypeResponse getEquipmentType() {
+        return new EquipmentTypeResponse(Arrays.stream(EquipmentType.values())
+                .map(EquipmentType::getType).toArray(String[]::new));
+    }
 
 }

@@ -4,6 +4,7 @@ import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentType;
 import com.dgsw.equipment.domain.equipment.presentation.dto.request.CreateEquipment;
 import com.dgsw.equipment.domain.equipment.presentation.dto.request.EquipmentRequest;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentListResponse;
+import com.dgsw.equipment.domain.equipment.presentation.dto.response.EquipmentTypeResponse;
 import com.dgsw.equipment.domain.equipment.presentation.dto.response.UserEquipmentListResponse;
 import com.dgsw.equipment.domain.equipment.service.EquipmentService;
 import com.dgsw.equipment.global.infra.raspberry.service.RaspberryService;
@@ -62,6 +63,12 @@ public class EquipmentController {
             @RequestParam("type") EquipmentType type
     ) {
         return equipmentService.getEquipmentAllByType(type);
+    }
+
+    @Operation(summary = "기자재 카테고리 목록 조회")
+    @GetMapping("/types")
+    public EquipmentTypeResponse getEquipmentType() {
+        return equipmentService.getEquipmentType();
     }
 
 }
