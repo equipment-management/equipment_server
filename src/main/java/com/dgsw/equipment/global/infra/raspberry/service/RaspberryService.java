@@ -19,7 +19,7 @@ public class RaspberryService {
     private Mono<String> getHash() {
         return webClient.raspberryClient()
                 .get()
-                .uri("/json_test")
+                .uri("/")
                 .retrieve()
                 .bodyToMono(String.class);
     }
@@ -27,14 +27,18 @@ public class RaspberryService {
     public HashRo returnHash() {
         String hash = getHash().block();
 
-        try {
-            JSONObject jsonObject = new JSONObject(hash);
+        log.info(hash);
 
-            return new HashRo(jsonObject.get("id").toString(),
-                    jsonObject.get("text").toString());
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return new HashRo("", "");
+
+//        try {
+//            JSONObject jsonObject = new JSONObject(hash);
+//
+//            return new HashRo(jsonObject.get("id").toString(),
+//                    jsonObject.get("text").toString());
+//        } catch (JSONException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 }
