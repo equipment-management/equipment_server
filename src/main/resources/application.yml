@@ -51,7 +51,7 @@ aws:
 
 app:
   dauth:
-    ras-url: http://192.168.125.229:8080
+    ras-url: http://221.168.22.203:8080
     auth-url: http://dauth.b1nd.com/api
     open-url: http://open.dodam.b1nd.com/api
     client-id: af3a177fb1d3425b8828c072feebe63d2122c01c191b42d9aab6748864c7de97
