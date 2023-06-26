@@ -1,4 +1,4 @@
-name: Dasarang CI/CD
+name: Equipment CI/CD
 
 on:
   push:
