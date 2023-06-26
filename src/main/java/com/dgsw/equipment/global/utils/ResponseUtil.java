@@ -37,6 +37,8 @@ public class ResponseUtil {
                 .status(equipment.getStatus())
                 .rentaledAt(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(equipment.getRentaledAt()))
                 .terminateRental(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(equipment.getTerminateRental()))
+                .reason(equipment.getReason()).name(equipment.getUser().getName())
+                .grade(equipment.getUser().getGrade()).room(equipment.getUser().getRoom()).number(equipment.getUser().getNumber())
                 .build();
     }
 }

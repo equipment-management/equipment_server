@@ -41,6 +41,7 @@ public class UserEquipment {
     @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
     private LocalDate terminateRental;
 
+    private String reason;
     @Column(unique = true)
     private String hashCode;
     public void addHashCode(String hashCode) {
@@ -72,10 +73,11 @@ public class UserEquipment {
     }
 
     @Builder
-    public UserEquipment(User user, Equipment equipment, LocalDate rentaledAt, LocalDate terminateRental) {
+    public UserEquipment(User user, Equipment equipment, LocalDate rentaledAt, LocalDate terminateRental, String reason) {
         this.user = user;
         this.equipment = equipment;
         this.rentaledAt = rentaledAt;
         this.terminateRental = terminateRental;
+        this.reason = reason;
     }
 }

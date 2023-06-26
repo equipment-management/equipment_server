@@ -18,5 +18,10 @@ public class UserEquipmentResponse {
     private EquipmentStatus status;
     private String rentaledAt;
     private String terminateRental;
+    private String reason;
+    private int grade;
+    private int room;
+    private int number;
+    private String name;
 
 }

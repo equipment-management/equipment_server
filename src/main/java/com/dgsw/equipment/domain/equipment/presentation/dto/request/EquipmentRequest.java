@@ -12,5 +12,6 @@ public class EquipmentRequest {
 
     private LocalDate rentaledAt;
     private LocalDate terminateRental;
+    private String reason;
 
 }

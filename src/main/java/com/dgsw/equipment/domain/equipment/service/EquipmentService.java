@@ -72,6 +72,7 @@ public class EquipmentService {
                 .user(user)
                 .rentaledAt(request.getRentaledAt())
                 .terminateRental(request.getTerminateRental())
+                .reason(request.getReason())
                 .build();
 
         userEquipmentRepository.save(userEquipment);
