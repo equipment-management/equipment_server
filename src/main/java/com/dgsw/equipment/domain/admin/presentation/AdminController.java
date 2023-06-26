@@ -19,16 +19,22 @@ public class AdminController {
     private final AdminService adminService;
     private final RaspberryService raspberryService;
 
-    @Operation(summary = "승인되지 않은 신청 리스트 조회")
+    @Operation(summary = "승인되지 않은 신청 리스트 조회 (대기)")
     @GetMapping("/pending")
     public UserEquipmentListResponse getUserEquipmentAllByPending() {
         return adminService.getUserEquipmentAllByPending();
     }
 
-    @Operation(summary = "승인된 신청 리스트 조회")
+    @Operation(summary = "승인된 신청 리스트 조회 (대여)")
     @GetMapping("/approve")
     public UserEquipmentListResponse getUserEquipmentAllByApprove() {
         return adminService.getUserEquipmentAllByApprove();
+    }
+
+    @Operation(summary = "반납 신청된 리스트 조회 (반납)")
+    @GetMapping("/return-request")
+    public UserEquipmentListResponse getUserEquipmentAllByReturnRequest() {
+        return adminService.getUserEquipmentAllByReturnRequest();
     }
 
     @Operation(summary = "신청 기자재 거절")

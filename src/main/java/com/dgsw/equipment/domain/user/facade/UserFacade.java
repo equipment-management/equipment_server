@@ -22,10 +22,4 @@ public class UserFacade {
         return auth.getUser();
     }
 
-    public void checkPermission() {
-        User user = getCurrentUser();
-        if(!user.getRole().equals(UserRole.ROLE_ADMIN))
-            throw AdminForbiddenException.EXCEPTION;
-    }
-
 }

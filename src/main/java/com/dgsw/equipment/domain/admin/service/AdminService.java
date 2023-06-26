@@ -1,5 +1,6 @@
 package com.dgsw.equipment.domain.admin.service;
 
+import com.dgsw.equipment.domain.admin.exception.EquipmentNotReturnRequestException;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
 import com.dgsw.equipment.domain.equipment.domain.repository.EquipmentRepository;
@@ -22,11 +23,8 @@ public class AdminService {
     private final EquipmentRepository equipmentRepository;
     private final UserEquipmentRepository userEquipmentRepository;
     private final EquipmentFacade equipmentFacade;
-    private final UserFacade userFacade;
 
     public UserEquipmentListResponse getUserEquipmentAllByPending() {
-        userFacade.checkPermission();
-
         List<UserEquipment> userEquipments = equipmentFacade
                 .findUserEquipmentAllByStatus(EquipmentStatus.PENDING);
 
@@ -40,8 +38,6 @@ public class AdminService {
     }
 
     public UserEquipmentListResponse getUserEquipmentAllByApprove() {
-        userFacade.checkPermission();
-
         List<UserEquipment> userEquipments = equipmentFacade
                 .findUserEquipmentAllByStatus(EquipmentStatus.APPROVE);
 
@@ -54,9 +50,20 @@ public class AdminService {
                 .build();
     }
 
-    public void denyUserEquipment(Long userEquipmentId) {
-        userFacade.checkPermission();
+    public UserEquipmentListResponse getUserEquipmentAllByReturnRequest() {
+        List<UserEquipment> userEquipments = equipmentFacade
+                .findUserEquipmentAllByStatus(EquipmentStatus.RETURN_REQUEST);
 
+        List<UserEquipmentResponse> list = userEquipments.stream()
+                .map(ResponseUtil::getUserEquipmentResponse)
+                .collect(Collectors.toList());
+
+        return UserEquipmentListResponse.builder()
+                .list(list)
+                .build();
+    }
+
+    public void denyUserEquipment(Long userEquipmentId) {
         UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
         equipment.denyEquipment();
 
@@ -64,8 +71,6 @@ public class AdminService {
     }
 
     public void approveEquipment(Long userEquipmentId, String hashCode) {
-        userFacade.checkPermission();
-
         UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
         equipment.addHashCode(hashCode);
         equipment.approveEquipment();
@@ -75,9 +80,11 @@ public class AdminService {
     }
 
     public void returnEquipment(Long userEquipmentId, String hashCode) {
-        userFacade.checkPermission();
-
         UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
+
+        if (equipment.getStatus().equals(EquipmentStatus.RETURN_REQUEST))
+            throw EquipmentNotReturnRequestException.EXCEPTION;
+
         equipment.checkHashCode(hashCode);
         equipment.returnEquipment();
 

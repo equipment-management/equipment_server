@@ -59,6 +59,9 @@ public class UserEquipment {
     public void denyEquipment() {
         this.status = EquipmentStatus.DENY;
     }
+    public void returnRequestRquipment() {
+        this.status = EquipmentStatus.RETURN_REQUEST;
+    }
     public void approveEquipment() {
         this.status = EquipmentStatus.APPROVE;
     }

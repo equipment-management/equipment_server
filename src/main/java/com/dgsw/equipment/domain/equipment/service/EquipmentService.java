@@ -1,5 +1,6 @@
 package com.dgsw.equipment.domain.equipment.service;
 
+import com.dgsw.equipment.domain.admin.exception.AdminForbiddenException;
 import com.dgsw.equipment.domain.equipment.domain.Equipment;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
@@ -19,6 +20,7 @@ import com.dgsw.equipment.domain.upload.domain.Image;
 import com.dgsw.equipment.domain.upload.domain.repository.ImageRepository;
 import com.dgsw.equipment.domain.upload.exception.ImageNotFoundException;
 import com.dgsw.equipment.domain.user.domain.User;
+import com.dgsw.equipment.domain.user.domain.enums.UserRole;
 import com.dgsw.equipment.domain.user.facade.UserFacade;
 import com.dgsw.equipment.global.utils.ResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,9 @@ public class EquipmentService {
     private final UserEquipmentRepository userEquipmentRepository;
 
     public void createEquipment(CreateEquipment request) {
-        userFacade.checkPermission();
+        User user = userFacade.getCurrentUser();
+        if(user.getRole().equals(UserRole.ROLE_ADMIN))
+            throw AdminForbiddenException.EXCEPTION;
 
         equipmentFacade.existsByEquipmentName(request.getName());
         Equipment equipment = request.toEntity();
@@ -82,7 +86,7 @@ public class EquipmentService {
         if(!userEquipment.getStatus().equals(EquipmentStatus.APPROVE))
             throw UserEquipmentReturnPermissionException.EXCEPTION;
 
-        userEquipment.returnEquipment();
+        userEquipment.returnRequestRquipment();
         equipmentRepository.save(equipment);
     }
 
