@@ -3,6 +3,8 @@ package com.dgsw.equipment.global.infra.s3.service;
 import com.amazonaws.services.s3.model.*;
 import com.dgsw.equipment.global.infra.s3.config.AWSConfiguration;
 import com.dgsw.equipment.global.infra.s3.config.AWSProperties;
+import com.dgsw.equipment.global.infra.s3.exception.FailedToSaveException;
+import com.dgsw.equipment.global.infra.s3.validation.FileValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +19,8 @@ public class S3Service {
     private final AWSConfiguration aws;
     private final AWSProperties awsProperties;
 
-    public String s3UploadFile(MultipartFile file) {
+    public String s3UploadFile(MultipartFile file, FileValidator validator) {
+        validator.validate(file);
         String originName = "equipment";
         String fileName = createFileName(originName);
         try {
@@ -31,6 +34,7 @@ public class S3Service {
             );
         } catch (Exception e) {
             e.printStackTrace();
+            throw FailedToSaveException.EXCEPTION;
         }
 
         return fileName;

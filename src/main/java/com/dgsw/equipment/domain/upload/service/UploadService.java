@@ -5,12 +5,17 @@ import com.dgsw.equipment.domain.equipment.facade.EquipmentFacade;
 import com.dgsw.equipment.domain.upload.domain.Image;
 import com.dgsw.equipment.domain.upload.domain.repository.ImageRepository;
 import com.dgsw.equipment.domain.upload.facade.UploadFacade;
+import com.dgsw.equipment.global.infra.s3.exception.FailedToSaveException;
+import com.dgsw.equipment.global.infra.s3.exception.ImageSizeMismatchException;
 import com.dgsw.equipment.global.infra.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +30,16 @@ public class UploadService {
 
     @Transactional
     public Long uploadImage(MultipartFile file) {
-        String url = s3Service.s3UploadFile(file);
+        String url = s3Service.s3UploadFile(file, data -> {
+            try {
+                BufferedImage bufferedImage = ImageIO.read(data.getInputStream());
+                if (!(bufferedImage.getWidth() == 1400 && bufferedImage.getHeight() == 450)) {
+                    throw ImageSizeMismatchException.EXCEPTION;
+                }
+            } catch (IOException e) {
+                throw FailedToSaveException.EXCEPTION;
+            }
+        });
         Image image = new Image(url);
 
         return imageRepository.save(image).getImageId();

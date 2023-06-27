@@ -42,7 +42,15 @@ public enum ErrorCode implements ErrorProperty{
     USER_EQUIPMENT_RETURN_REQUEST(HttpStatus.FORBIDDEN, "기자재 반납신청이 되지 않은 기자재입니다."),
 
     // Image 코드
-    IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다.");
+    IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다."),
+
+    // File 코드
+    EMPTY_FILE(HttpStatus.BAD_REQUEST, "파일이 비어있습니다."),
+    TOO_LONG_NAME(HttpStatus.BAD_REQUEST, "파일 이름이 너무 깁니다."),
+    FAILED_TO_SAVE(HttpStatus.FAILED_DEPENDENCY, "저장에 실패했습니다."),
+    IMAGE_SIZE_MISMATCH(HttpStatus.NOT_FOUND, "이미지 사이즈가 너무 크거나 작습니다."),
+    OVER_FILE_SIZE_LIMIT(HttpStatus.PAYLOAD_TOO_LARGE, "파일 사이즈는 1MB 이하여야 합니다.")
+    ;
 
     private final HttpStatus status;
     private final String message;
