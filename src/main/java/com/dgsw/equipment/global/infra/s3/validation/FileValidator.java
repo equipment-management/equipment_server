@@ -15,7 +15,7 @@ public interface FileValidator {
             throw EmptyFileException.EXCEPTION;
         }
 
-        if (Objects.nonNull(file.getOriginalFilename()) && file.getOriginalFilename().length() > 20) {
+        if (Objects.nonNull(file.getOriginalFilename()) && file.getOriginalFilename().length() > 50) {
             throw TooLongNameException.EXCEPTION;
         }
 
