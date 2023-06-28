@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.Random;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -25,11 +27,19 @@ public class RaspberryService {
     }
 
     public HashRo returnHash() {
-        String hash = getHash().block();
+//        String hash = getHash().block();
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
 
-        log.info(hash);
+        String hashCode = random.ints(leftLimit,rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
 
-        return new HashRo("", "");
+        return new HashRo(hashCode, "test");
 
 //        try {
 //            JSONObject jsonObject = new JSONObject(hash);
