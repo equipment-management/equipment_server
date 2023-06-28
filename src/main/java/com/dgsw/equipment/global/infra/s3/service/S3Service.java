@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.model.*;
 import com.dgsw.equipment.global.infra.s3.config.AWSConfiguration;
 import com.dgsw.equipment.global.infra.s3.config.AWSProperties;
 import com.dgsw.equipment.global.infra.s3.exception.FailedToSaveException;
+import com.dgsw.equipment.global.infra.s3.exception.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class S3Service {
         try {
             return fileName.substring(fileName.lastIndexOf("."));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
+            throw InvalidFormatException.EXCEPTION;
         }
     }
 
