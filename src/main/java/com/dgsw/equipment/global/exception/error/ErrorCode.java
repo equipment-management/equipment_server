@@ -34,6 +34,7 @@ public enum ErrorCode implements ErrorProperty{
     EQUIPMENT_OVERFLOW(HttpStatus.BAD_REQUEST, "기자재 개수를 초과하였습니다."),
     EQUIPMENT_UNDERFLOW(HttpStatus.BAD_REQUEST, "반납할 기자재가 존재하지 않습니다."),
     HASHCODE_WRONG(HttpStatus.BAD_REQUEST, "기자재의 해시코드가 맞지 않습니다."),
+    ALREADY_HASHCODE(HttpStatus.CONFLICT, "이미 존재하는 해시코드입니다."),
 
     // User Equipment 코드
     USER_EQUIPMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "신청한 기자재를 찾을 수 없습니다."),

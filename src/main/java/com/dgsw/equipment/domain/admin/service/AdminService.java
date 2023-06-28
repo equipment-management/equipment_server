@@ -71,6 +71,7 @@ public class AdminService {
     }
 
     public void approveEquipment(Long userEquipmentId, String hashCode) {
+        equipmentFacade.existsCheckHashCode(hashCode);
         UserEquipment equipment = equipmentFacade.findUserEquipmentByUserEquipmentId(userEquipmentId);
         equipment.addHashCode(hashCode);
         equipment.approveEquipment();

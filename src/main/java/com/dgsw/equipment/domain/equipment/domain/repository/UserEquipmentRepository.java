@@ -21,4 +21,6 @@ public interface UserEquipmentRepository extends JpaRepository<UserEquipment, Lo
 
     List<UserEquipment> findAllByStatus(EquipmentStatus status);
 
+    boolean existsByHashCode(String hash);
+
 }

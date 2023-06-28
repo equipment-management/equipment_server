@@ -1,5 +1,6 @@
 package com.dgsw.equipment.domain.equipment.facade;
 
+import com.dgsw.equipment.domain.admin.exception.AlreadyExistsHashCodeException;
 import com.dgsw.equipment.domain.equipment.domain.Equipment;
 import com.dgsw.equipment.domain.equipment.domain.UserEquipment;
 import com.dgsw.equipment.domain.equipment.domain.enums.EquipmentStatus;
@@ -21,12 +22,12 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EquipmentFacade {
 
     private final EquipmentRepository equipmentRepository;
     private final UserEquipmentRepository userEquipmentRepository;
 
-    @Transactional
     public void existsByEquipmentName(String equipmentName) {
         equipmentRepository.findByEquipmentName(equipmentName)
                 .ifPresent(m -> {
@@ -34,23 +35,19 @@ public class EquipmentFacade {
                 });
     }
 
-    @Transactional
     public Equipment findEquipmentById(Long id) {
         return equipmentRepository.findById(id)
                 .orElseThrow(() -> EquipmentNotFoundException.EXCEPTION);
     }
 
-    @Transactional
     public List<Equipment> findEquipmentAllByEquipmentName(String equipmentName) {
         return equipmentRepository.findAllByEquipmentName(equipmentName);
     }
 
-    @Transactional
     public List<Equipment> findEquipmentAllByType(EquipmentType type) {
         return equipmentRepository.findAllByType(type);
     }
 
-    @Transactional
     public List<Equipment> findEquipmentAllByUser(User user) {
         List<UserEquipment> userEquipment = userEquipmentRepository.findAllByUser(user);
         return userEquipment.stream()
@@ -58,26 +55,27 @@ public class EquipmentFacade {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
     public List<UserEquipment> findUserEquipmentAllByUser(User user) {
         return userEquipmentRepository.findAllByUser(user);
     }
 
-    @Transactional
     public List<UserEquipment> findUserEquipmentAllByStatus(EquipmentStatus status) {
         return userEquipmentRepository.findAllByStatus(status);
     }
 
-    @Transactional
     public UserEquipment checkEquipmentPermission(User user, Equipment equipment) {
         return userEquipmentRepository.findByUserAndEquipment(user, equipment)
                 .orElseThrow(() -> UserEquipmentForbiddenException.EXCEPTION);
     }
 
-    @Transactional
     public UserEquipment findUserEquipmentByUserEquipmentId(Long userEquipmentId) {
         return userEquipmentRepository.findById(userEquipmentId)
                 .orElseThrow(() -> UserEquipmentNotFoundException.EXCEPTION);
+    }
+
+    public void existsCheckHashCode(String hash) {
+        if (userEquipmentRepository.existsByHashCode(hash))
+            throw AlreadyExistsHashCodeException.EXCEPTION;
     }
 
 }
