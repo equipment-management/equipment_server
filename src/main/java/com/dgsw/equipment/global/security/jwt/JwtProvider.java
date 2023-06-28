@@ -70,7 +70,7 @@ public class JwtProvider {
 
     private String parseToken(String bearerToken) {
         if(bearerToken != null && bearerToken.startsWith(jwtProperties.getPrefix())) {
-            return bearerToken.replace(jwtProperties.getPrefix(), "");
+            return bearerToken.replace(jwtProperties.getPrefix(), "").trim();
         }
         return null;
     }
