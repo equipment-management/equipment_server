@@ -42,7 +42,7 @@ public class S3Service {
     }
 
     private String createFileName(String originalName) {
-        return "image/" + UUID.randomUUID() + getFileExtension(originalName);
+        return "image/" + UUID.randomUUID() + "_" + originalName;
     }
 
     public String getImageUrl(String fileName) {
@@ -50,14 +50,6 @@ public class S3Service {
             return awsProperties.getUrl() + s3Object.getKey();
         } catch (AmazonS3Exception | IOException e) {
             return null;
-        }
-    }
-
-    private String getFileExtension(String fileName) {
-        try {
-            return fileName.substring(fileName.lastIndexOf("."));
-        } catch (StringIndexOutOfBoundsException e) {
-            throw InvalidFormatException.EXCEPTION;
         }
     }
 
