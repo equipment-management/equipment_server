@@ -24,9 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = jwtProvider.resolveToken(request);
         String path = request.getServletPath();
 
-        log.info("Path : " + path + " / Token : " + token);
-        log.info("Header : " +  request.getHeader("Authorization"));
-        log.info("If : " + (token != null));
+        log.info("Path : " + path);
         if(token != null) {
             if(path.equals("/auth/refresh")) {
                 jwtProvider.checkRefreshToken(token.trim());
