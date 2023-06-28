@@ -28,14 +28,11 @@ public class RaspberryService {
 
     public HashRo returnHash() {
 //        String hash = getHash().block();
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
         Random random = new Random();
 
-        String hashCode = random.ints(leftLimit,rightLimit + 1)
+        String hashCode = random.ints(48,123)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
+                .limit(10)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
 
