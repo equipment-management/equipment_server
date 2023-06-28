@@ -49,7 +49,8 @@ public enum ErrorCode implements ErrorProperty{
     TOO_LONG_NAME(HttpStatus.BAD_REQUEST, "파일 이름이 너무 깁니다."),
     FAILED_TO_SAVE(HttpStatus.FAILED_DEPENDENCY, "저장에 실패했습니다."),
     IMAGE_SIZE_MISMATCH(HttpStatus.NOT_FOUND, "이미지 사이즈가 너무 크거나 작습니다."),
-    OVER_FILE_SIZE_LIMIT(HttpStatus.PAYLOAD_TOO_LARGE, "파일 사이즈는 1MB 이하여야 합니다.")
+    OVER_FILE_SIZE_LIMIT(HttpStatus.PAYLOAD_TOO_LARGE, "파일 사이즈는 1MB 이하여야 합니다."),
+    INVALID_FORMAT(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일입니다.")
     ;
 
     private final HttpStatus status;

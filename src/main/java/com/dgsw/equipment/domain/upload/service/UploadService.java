@@ -30,16 +30,7 @@ public class UploadService {
 
     @Transactional
     public Long uploadImage(MultipartFile file) {
-        String url = s3Service.s3UploadFile(file, data -> {
-            try {
-                BufferedImage bufferedImage = ImageIO.read(data.getInputStream());
-                if (!(bufferedImage.getWidth() == 1400 && bufferedImage.getHeight() == 450)) {
-                    throw ImageSizeMismatchException.EXCEPTION;
-                }
-            } catch (IOException e) {
-                throw FailedToSaveException.EXCEPTION;
-            }
-        });
+        String url = s3Service.s3UploadFile(file);
         Image image = new Image(url);
 
         return imageRepository.save(image).getImageId();

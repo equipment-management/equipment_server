@@ -4,10 +4,11 @@ import com.amazonaws.services.s3.model.*;
 import com.dgsw.equipment.global.infra.s3.config.AWSConfiguration;
 import com.dgsw.equipment.global.infra.s3.config.AWSProperties;
 import com.dgsw.equipment.global.infra.s3.exception.FailedToSaveException;
-import com.dgsw.equipment.global.infra.s3.validation.FileValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -19,8 +20,7 @@ public class S3Service {
     private final AWSConfiguration aws;
     private final AWSProperties awsProperties;
 
-    public String s3UploadFile(MultipartFile file, FileValidator validator) {
-        validator.validate(file);
+    public String s3UploadFile(MultipartFile file) {
         String originName = "equipment";
         String fileName = createFileName(originName);
         try {
@@ -41,7 +41,7 @@ public class S3Service {
     }
 
     private String createFileName(String originalName) {
-        return "image/" + UUID.randomUUID() + "_" + originalName;
+        return "image/" + UUID.randomUUID() + getFileExtension(originalName);
     }
 
     public String getImageUrl(String fileName) {
@@ -49,6 +49,14 @@ public class S3Service {
             return awsProperties.getUrl() + s3Object.getKey();
         } catch (AmazonS3Exception | IOException e) {
             return null;
+        }
+    }
+
+    private String getFileExtension(String fileName) {
+        try {
+            return fileName.substring(fileName.lastIndexOf("."));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
         }
     }
 
