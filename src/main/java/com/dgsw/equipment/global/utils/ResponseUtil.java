@@ -30,7 +30,7 @@ public class ResponseUtil {
 
     public static UserEquipmentResponse getUserEquipmentResponse(UserEquipment equipment) {
         return UserEquipmentResponse.builder()
-                .userEquipmentId(equipment.getEquipment().getEquipmentId())
+                .userEquipmentId(equipment.getId())
                 .equipmentName(equipment.getEquipment().getEquipmentName())
                 .brand(equipment.getEquipment().getBrand()).type(equipment.getEquipment().getType())
                 .size(equipment.getEquipment().getSize() - equipment.getEquipment().getRentalSize())
