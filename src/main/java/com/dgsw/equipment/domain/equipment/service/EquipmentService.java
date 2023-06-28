@@ -45,7 +45,7 @@ public class EquipmentService {
 
     public void createEquipment(CreateEquipment request) {
         User user = userFacade.getCurrentUser();
-        if(user.getRole().equals(UserRole.ROLE_ADMIN))
+        if(!user.getRole().equals(UserRole.ROLE_ADMIN))
             throw AdminForbiddenException.EXCEPTION;
 
         equipmentFacade.existsByEquipmentName(request.getName());
